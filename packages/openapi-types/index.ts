@@ -123,11 +123,23 @@ export namespace OpenAPIV3_1 {
 
   export type ExternalDocumentationObject = OpenAPIV3.ExternalDocumentationObject;
 
-  export type ParameterObject = OpenAPIV3.ParameterObject;
+  type ParameterBaseFields = {
+    schema?: ReferenceObject | SchemaObject;
+    examples?: Record<string, ReferenceObject | ExampleObject>;
+    content?: Record<string, MediaTypeObject>;
+  };
 
-  export type HeaderObject = OpenAPIV3.HeaderObject;
+  export type ParameterObject = Modify<
+    OpenAPIV3.ParameterObject,
+    ParameterBaseFields
+  >;
 
-  export type ParameterBaseObject = OpenAPIV3.ParameterBaseObject;
+  export type HeaderObject = ParameterBaseObject;
+
+  export type ParameterBaseObject = Modify<
+    OpenAPIV3.ParameterBaseObject,
+    ParameterBaseFields
+  >;
 
   export type NonArraySchemaObjectType =
     | OpenAPIV3.NonArraySchemaObjectType
@@ -202,10 +214,16 @@ export namespace OpenAPIV3_1 {
     {
       schema?: SchemaObject | ReferenceObject;
       examples?: Record<string, ReferenceObject | ExampleObject>;
+      encoding?: Record<string, EncodingObject>;
     }
   >;
 
-  export type EncodingObject = OpenAPIV3.EncodingObject;
+  export type EncodingObject = Modify<
+    OpenAPIV3.EncodingObject,
+    {
+      headers?: Record<string, ReferenceObject | HeaderObject>;
+    }
+  >;
 
   export type RequestBodyObject = Modify<
     OpenAPIV3.RequestBodyObject,
