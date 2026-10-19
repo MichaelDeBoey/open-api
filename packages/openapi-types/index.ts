@@ -176,6 +176,12 @@ export namespace OpenAPIV3_1 {
     Omit<OpenAPIV3.BaseSchemaObject, 'nullable'>,
     {
       examples?: OpenAPIV3.BaseSchemaObject['example'][];
+      /**
+       * @deprecated Use `examples` instead. OpenAPI 3.1 deprecates `example` in
+       * favor of the JSON Schema `examples` keyword, and later versions of the
+       * specification may remove it.
+       */
+      example?: OpenAPIV3.BaseSchemaObject['example'];
       exclusiveMinimum?: boolean | number;
       exclusiveMaximum?: boolean | number;
       contentMediaType?: string;
